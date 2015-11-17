@@ -8,6 +8,7 @@ package ec.edu.espe.distribuidas.facturacion.modelo.test;
 import ec.edu.espe.distribuidas.facturacion.modelo.dao.ClienteFacade;
 import ec.edu.espe.distribuidas.facturacion.modelo.entity.Cliente;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.ValidadorFormato;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -19,6 +20,6 @@ public class Menu {
         //ClienteFacade facade=new ClienteFacade();
         //Cliente cliente=facade.findByPrimaryKey("1724218951");
         //System.out.println(cliente);
-        System.out.println(ValidadorFormato.fomatoEntero("00001234"));
+        System.out.println(StringUtils.splitByWholeSeparator("|2|3","|")[0]);
     }
 }

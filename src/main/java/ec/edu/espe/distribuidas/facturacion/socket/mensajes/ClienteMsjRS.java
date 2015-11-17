@@ -11,6 +11,9 @@ import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.Cuerpo;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.CuerpoRS;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.MensajeRQ;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.MensajeRS;
+import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.Ent;
+import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.Text;
+import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.TextV;
 
 /**
  *
@@ -22,14 +25,20 @@ public class ClienteMsjRS extends CuerpoRS
     @Override
     public void ejecutar() 
     {
+        Text documento=(Text) getParametro("documento");
+        Text cedula=(Text) getParametro("cedula");
+        
+        
         ClienteServicio servicio=new ClienteServicio();
-        Cliente cliente=servicio.obtnerCliente("ced","1812323");
-       // agregarParametro(null, null);
-       // String tipoDocumento=mensajeRQ.getCuerpo().getDatos(0);
-       // String valor=mensajeRQ.getCuerpo().getDatos(1);
-       // ClienteServicio servicio=new ClienteServicio();
-       // Cliente cliente=servicio.obtnerCliente(tipoDocumento, valor);
-       // this.agregarDatoCadena(cliente);
+        Cliente cliente=servicio.obtnerCliente(documento.getDato(),cedula.getDato());
+        
+        agregarAtributo(new Text("OKO",3));
+        agregarAtributo(new Text(cliente.getValorDocumento(),9));
+        
+        TextV textoVariable=new TextV();        
+        textoVariable.agregarObjCodificado(cliente);
+        agregarAtributo(textoVariable);
+
         
     }
 
@@ -42,7 +51,9 @@ public class ClienteMsjRS extends CuerpoRS
     @Override
     public void definirEstructura() 
     {
-        //agregarEstructParametro(new );
+        agregarParametro("documento",new Text(5));
+        agregarParametro("cedula",new Text(15));
+        
     }
 
     

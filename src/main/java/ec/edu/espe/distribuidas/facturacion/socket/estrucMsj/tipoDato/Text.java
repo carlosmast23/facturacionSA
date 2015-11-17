@@ -15,7 +15,8 @@ public class Text extends TipoDatoMensaje<String>
 {
     private String texto;
 
-    public Text(Integer longitud) {
+    public Text(Integer longitud) 
+    {
         this.longitud = longitud;
     }
 
@@ -40,6 +41,11 @@ public class Text extends TipoDatoMensaje<String>
     @Override
     public String asTexto() 
     {
+        if(texto.length()>longitud)
+        {
+            texto=texto.substring(0,longitud);
+        }
+        
         return ValidadorFormato.completarEspaciosDerecha(texto, longitud);
     }
     

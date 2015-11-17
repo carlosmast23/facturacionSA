@@ -11,6 +11,6 @@ package ec.edu.espe.distribuidas.facturacion.socket.estrucMsj;
  */
 public abstract class CuerpoRQ extends Cuerpo implements CuerpoInterface
 {    
-    //public abstract void ejecutar(); 
+    public abstract void ejecutar(); 
     
 }

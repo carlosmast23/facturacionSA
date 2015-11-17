@@ -8,6 +8,8 @@ package ec.edu.espe.distribuidas.facturacion.socket.estrucMsj;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.TipoDatoMensaje;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,41 +18,53 @@ import java.util.Map;
  */
 public abstract class CuerpoRS extends Cuerpo implements CuerpoInterface
 {
-    private Map<String,TipoDatoMensaje> parametros;
+    private List<Diccionario> parametros;
+    //private List<Map<String,TipoDatoMensaje>> listaParametros;
+    public abstract void ejecutar();
     public abstract void definirEstructura();
+   
 
     public CuerpoRS() 
     {
-        
-        parametros=new HashMap<String,TipoDatoMensaje>();
+        parametros=new LinkedList<>();
     }
      
     public void agregarParametro(String clave,TipoDatoMensaje dato)
     {
-        parametros.put(clave, dato);
+        parametros.add(new Diccionario(clave, dato));
     }
     
     public TipoDatoMensaje getParametro(String clave)
     {
-        return parametros.get(clave);
+        for (Diccionario parametro : parametros) {
+            if(parametro.key.equals(clave))
+            {
+                return parametro.valor;
+            }
+        }
+        return null;
     }
     
     public void construirAtributos(String trama)
     {
-        Map<String,TipoDatoMensaje> atributos =getAtributos();
-        Iterator it = atributos.keySet().iterator();
-        String parametroTxt;
-        while (it.hasNext()) 
+        List<Diccionario>  atributos =parametros;
+        String parametroTxt="";
+        for (Diccionario atributo : atributos) 
         {
-            String key = (String) it.next();
-            TipoDatoMensaje dato=atributos.get(key);
-            
-            parametroTxt=trama.substring(0,dato.getLongitud());
-            trama=trama.substring(dato.getLongitud());
-            
-            dato.setDato(parametroTxt);
-            
-        }
+            Integer longitud=atributo.valor.getLongitud();
+            if(longitud==-1)
+            {
+                parametroTxt=trama;
+            }
+            else
+            {
+                parametroTxt=trama.substring(0,longitud);
+                trama=trama.substring(longitud);
+            }
+            atributo.valor.setDato(parametroTxt);
+        }        
+
     }
+    
     
 }

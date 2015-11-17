@@ -19,6 +19,11 @@ public class Ent extends TipoDatoMensaje<Integer>
         this.txtEntero = txtEntero;
         this.longitud = longitud;
     }
+    
+    public Ent(Integer entero, Integer longitud) {
+        this.txtEntero = entero.toString();
+        this.longitud = longitud;
+    }
 
     public Ent(Integer longitud) {
         this.longitud = longitud;
@@ -40,7 +45,11 @@ public class Ent extends TipoDatoMensaje<Integer>
 
     @Override
     public String asTexto() {
-        return ValidadorFormato.completarEspaciosDerecha(txtEntero,longitud,"0");
+        if(txtEntero.length()>longitud)
+        {
+            txtEntero=txtEntero.substring(0,longitud);
+        }
+        return ValidadorFormato.completarEspaciosIzquierda(txtEntero,longitud,"0");
     }
     
 }

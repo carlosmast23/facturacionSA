@@ -12,5 +12,5 @@ package ec.edu.espe.distribuidas.facturacion.socket.estrucMsj;
 public interface CuerpoInterface 
 {
      public abstract String getIdMensaje();
-     public abstract void ejecutar();
+     
 }

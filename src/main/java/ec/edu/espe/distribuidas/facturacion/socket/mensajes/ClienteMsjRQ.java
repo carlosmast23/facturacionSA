@@ -5,10 +5,14 @@
  */
 package ec.edu.espe.distribuidas.facturacion.socket.mensajes;
 
+import ec.edu.espe.distribuidas.facturacion.modelo.servicio.ClienteServicio;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.Cuerpo;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.CuerpoRQ;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.CuerpoRS;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.MensajeRQ;
+import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.Text;
+import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.TextV;
+import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.TipoDatoMensaje;
 
 /**
  *
@@ -18,17 +22,21 @@ public class ClienteMsjRQ extends CuerpoRQ
 {
 
     @Override
+    public void ejecutar() 
+    {
+        agregarAtributo(new Text("CEDUL",5));
+        agregarAtributo(new Text("1724218951",15));
+        
+        //agregarDato("1724218951");
+        
+    }
+    
+    @Override
     public String getIdMensaje() 
     {
         return "CLIBUSSIMP";
     }
 
-    @Override
-    public void ejecutar() 
-    {
-      //  agregarDato("CEDUL");
-      //  agregarDato("1724218951");
-        
-    }
+    
     
 }

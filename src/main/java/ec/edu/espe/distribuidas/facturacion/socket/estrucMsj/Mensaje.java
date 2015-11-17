@@ -57,6 +57,7 @@ public class Mensaje
         cabecera.setIdMensaje(((CuerpoInterface)cuerpo).getIdMensaje());
         cabecera.setLongitudCuerpo(cuerpo.asTexto().length()+"");
         cabecera.setVerificacion(DigestUtils.md5Hex(cabecera.asTexto()));
+        
     }
 
   

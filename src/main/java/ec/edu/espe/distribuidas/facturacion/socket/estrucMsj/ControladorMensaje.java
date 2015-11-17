@@ -6,7 +6,12 @@
 package ec.edu.espe.distribuidas.facturacion.socket.estrucMsj;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.TipoDatoMensaje;
 import ec.edu.espe.distribuidas.facturacion.socket.mensajes.ClienteMsjRS;
+import ec.edu.espe.distribuidas.facturacion.socket.mensajes.ClienteMsjRespuesta;
+import ec.edu.espe.distribuidas.facturacion.socket.mensajes.ListadoClienteRS;
+import ec.edu.espe.distribuidas.facturacion.socket.mensajes.ListadoClienteRespuesta;
 import ec.edu.espe.distribuidas.facturacion.socket.mensajes.LoginRS;
+import ec.edu.espe.distribuidas.facturacion.socket.mensajes.RetiroRS;
+import ec.edu.espe.distribuidas.facturacion.socket.mensajes.TransaccionRS;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.LinkedList;
@@ -22,10 +27,12 @@ public class ControladorMensaje
     private static final int tamanioCabecera=85;
     
     private List<CuerpoRS> listaRS;
+    private List<CuerpoRespuesta> listaRespuestas;
 
     public ControladorMensaje() 
     {
         this.listaRS=new LinkedList<>();
+        this.listaRespuestas=new LinkedList<>();
         mensajesDefault();
     }            
     
@@ -43,11 +50,50 @@ public class ControladorMensaje
         Cabecera cabecera=getCabecera(txtCabecera);        
         CuerpoRS cuerpoRS=findCuerpoRs(cabecera.getIdMensaje());
         cuerpoRS.definirEstructura();
-        cuerpoRS.ejecutar();
         cuerpoRS.construirAtributos(txtCuerpo);
+        //cuerpoRS.ejecutar();
+        
                 
         
         return responderMsj(cabecera);
+    }
+    
+    /**
+     * Envia un trama respuesta para procesar el mensaje y tener
+     * la estructura como objeto de tipo mensaje
+     * @param trama
+     * @return 
+     */
+    public Mensaje construirMensaje(String trama)
+    {
+        String txtCabecera=trama.substring(0,tamanioCabecera);
+        String txtCuerpo=trama.substring(tamanioCabecera);
+        
+        Cabecera cabecera=getCabecera(txtCabecera);   
+        CuerpoRespuesta respuesta=findCuerpoRespuesta(cabecera.getIdMensaje());
+        respuesta.definirEstructura();
+        respuesta.construirAtributos(txtCuerpo);
+        Mensaje msjRespuesta=new Mensaje(cabecera, respuesta);
+        return msjRespuesta;
+        
+    }
+    
+    /**
+     * Busca un objeto que contenga la definicion para obtener la respuesta
+     * en ese contenedor del cuerpo
+     * @param id
+     * @return 
+     */
+    private CuerpoRespuesta findCuerpoRespuesta(String id)
+    {
+        for (CuerpoRespuesta respuesta : listaRespuestas) 
+        {
+            if(respuesta.getIdMensaje().equals(id))
+            {
+                return respuesta;
+            }
+        }
+        return null;
     }
     
     private MensajeRS responderMsj(Cabecera cabeceraRQ)
@@ -133,7 +179,13 @@ public class ControladorMensaje
     {
         this.agregarCuerpoRS(new ClienteMsjRS());
         this.agregarCuerpoRS(new LoginRS());
+        this.agregarCuerpoRS(new ListadoClienteRS());
+        this.agregarCuerpoRS(new TransaccionRS());
+        this.agregarCuerpoRS(new RetiroRS());
         //
+        
+        this.listaRespuestas.add(new ClienteMsjRespuesta());
+        this.listaRespuestas.add(new ListadoClienteRespuesta());
     }
     
     

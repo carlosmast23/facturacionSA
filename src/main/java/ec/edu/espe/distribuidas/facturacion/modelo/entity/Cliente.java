@@ -117,7 +117,7 @@ public class Cliente extends AbstractMapeo implements MensajeRsCodificar{
         mapeo.addColumna(new Columna("fecha_nacimiento",getField("fechaNacimiento"),""));
         
         /////////////mapeo para los arreglos ///////////////////////
-      
+       
         
     }
 
@@ -166,7 +166,7 @@ public class Cliente extends AbstractMapeo implements MensajeRsCodificar{
         sb.append(numeroTelefonico);sb.append(c);
         sb.append(numeroMovil);sb.append(c);
         sb.append(correElectronico);sb.append(c);
-        sb.append(fechaNacimiento);sb.append(c);
+        sb.append(fechaNacimiento);
         return sb.toString();
         
     }

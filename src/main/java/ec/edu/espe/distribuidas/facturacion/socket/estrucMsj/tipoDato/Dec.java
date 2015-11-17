@@ -5,6 +5,7 @@
  */
 package ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato;
 
+import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.ValidadorFormato;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -19,6 +20,13 @@ public class Dec extends TipoDatoMensaje<Float>
 
     public Dec(String txtDecimal, Integer enteros, Integer decimal) {
         this.txtDecimal = txtDecimal;
+        this.enteros = enteros;
+        this.decimal = decimal;
+        this.longitud=this.enteros+this.decimal;
+    }
+    
+    public Dec(Float numero, Integer enteros, Integer decimal) {
+        this.txtDecimal = numero.toString();
         this.enteros = enteros;
         this.decimal = decimal;
         this.longitud=this.enteros+this.decimal;
@@ -50,9 +58,10 @@ public class Dec extends TipoDatoMensaje<Float>
     @Override
     public String asTexto() 
     {
-        String enteroTxt=txtDecimal.substring(0,enteros);
-        String decimalTxt=txtDecimal.substring(enteros,enteros+decimal);
-        return enteroTxt+decimalTxt;
+        //String enteroTxt=StringUtils.splitByWholeSeparator(txtDecimal,".")[0];
+        //String decimalTxt=StringUtils.splitByWholeSeparator(txtDecimal,".")[1];
+        return ValidadorFormato.completarFloat(txtDecimal, enteros,decimal);
+        //return enteroTxt+decimalTxt;
     }
     
     

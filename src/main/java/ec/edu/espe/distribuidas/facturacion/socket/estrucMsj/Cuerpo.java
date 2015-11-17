@@ -20,13 +20,13 @@ import org.apache.commons.lang3.StringUtils;
 public class Cuerpo 
 {    
 
-    private Map<String,TipoDatoMensaje> atributos;
+    private List<Diccionario> atributos;
     private int claveAutomatica;
 
     public Cuerpo() 
     {
 
-        atributos=new HashMap<String,TipoDatoMensaje>();
+        atributos=new LinkedList<>();
     }
 
         
@@ -34,33 +34,39 @@ public class Cuerpo
      
     public void agregarAtributo(String clave,TipoDatoMensaje dato)
     {
-        atributos.put(clave,dato);
+        atributos.add(new Diccionario(clave, dato));
+
     }
     
     public void agregarAtributo(TipoDatoMensaje dato)
     {
-        atributos.put((claveAutomatica++)+"",dato);
+        atributos.add(new Diccionario(dato));
     }
     
     public TipoDatoMensaje getAtributos(String clave)
     {
-        return atributos.get(clave);
+        for (Diccionario atributo : atributos) {
+            if(atributo.key.equals(clave))
+            {
+                return atributo.valor;
+            }
+        }
+        return null;
     }
 
-    public Map<String, TipoDatoMensaje> getAtributos() {
+    public List<Diccionario> getAtributos() 
+    {
         return atributos;
     }
    
     public String asTexto()
     {
         StringBuilder sb=new StringBuilder();
-        Iterator it=atributos.keySet().iterator();
-        while(it.hasNext())
+        for (Diccionario atributo : atributos) 
         {
-            String clave=(String) it.next();
-            TipoDatoMensaje dato= atributos.get(clave);
-            sb.append(dato.asTexto());
+            sb.append(atributo.valor.asTexto());
         }
+        
         return sb.toString();
     }
     
@@ -69,5 +75,6 @@ public class Cuerpo
         atributos.clear();        
     }
     
+
     
 }

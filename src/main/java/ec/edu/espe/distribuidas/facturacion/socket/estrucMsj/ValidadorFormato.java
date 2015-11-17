@@ -44,6 +44,17 @@ public class ValidadorFormato
         
     }
     
+        public static String completarFloat(String numero,int entero, int decimales)
+    {
+        String numeroTxt=numero+"";
+        String enteroTxt=StringUtils.splitByWholeSeparator(numeroTxt,".")[0];
+        String decimalTxt=StringUtils.splitByWholeSeparator(numeroTxt,".")[1];
+        enteroTxt=StringUtils.leftPad(enteroTxt, entero,"0");
+        decimalTxt=StringUtils.rightPad(decimalTxt,decimales,"0");
+        return enteroTxt+decimalTxt;
+        
+    }
+    
     public static String completarEntero(String numero,int longitud)
     {
         String numeroTxt=numero+"";
