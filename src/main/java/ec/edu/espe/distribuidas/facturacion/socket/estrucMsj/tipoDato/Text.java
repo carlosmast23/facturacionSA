@@ -30,7 +30,7 @@ public class Text extends TipoDatoMensaje<String>
 
     @Override
     public String getDato() {
-        return texto.substring(0,longitud);
+        return texto.substring(0,longitud).trim();
     }
 
     @Override

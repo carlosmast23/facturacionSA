@@ -5,11 +5,14 @@
  */
 package ec.edu.espe.distribuidas.facturacion.socket.mensajes;
 
+import ec.edu.espe.distribuidas.facturacion.modelo.servicio.UsuarioServicio;
+import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.ControladorMensaje;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.CuerpoRS;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.MensajeRQ;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.Dec;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.Ent;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.Text;
+import ec.edu.espe.distribuidas.facturacion.socket.servidor.SocketComunicacion;
 
 /**
  *
@@ -23,8 +26,16 @@ public class LoginRS extends CuerpoRS
         
         Text usuario=(Text) getParametro("usuario");
         Text clave=(Text) getParametro("clave");              
-                
-        agregarAtributo(new Text("OK",2));
+        
+        UsuarioServicio servicio=new UsuarioServicio();
+        if(servicio.login(usuario.getDato(),clave.getDato()))
+        {
+            agregarAtributo(new Text("OK",2));
+        }
+        else
+        {
+            agregarAtributo(new Text(SocketComunicacion.TEXTO_SALIR,2));
+        }       
 
     }
 
@@ -32,7 +43,7 @@ public class LoginRS extends CuerpoRS
     public void definirEstructura() 
     {
         agregarParametro("usuario",new Text(10));
-        agregarParametro("clave",new Text(10));        
+        agregarParametro("clave",new Text(10));  
     }
 
     @Override

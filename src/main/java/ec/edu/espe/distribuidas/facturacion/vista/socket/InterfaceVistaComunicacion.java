@@ -1,0 +1,19 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ec.edu.espe.distribuidas.facturacion.vista.socket;
+
+import ec.edu.espe.distribuidas.facturacion.socket.servidor.SocketComunicacion;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Carlos
+ */
+public interface InterfaceVistaComunicacion {
+   public abstract void mensajeConsola(String mensaje);
+   public void actualizarLista(ArrayList<SocketComunicacion> listaConexiones); 
+           
+}

@@ -14,6 +14,8 @@ import java.util.Date;
  */
 public class Cabecera 
 {
+    public static final int tamanioCabecera=85;
+    
     private String tipoMensaje;
     private String originador;
     private String fecha;

@@ -5,29 +5,31 @@
  */
 package ec.edu.espe.distribuidas.facturacion.socket.mensajes;
 
-import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.CuerpoRQ;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.CuerpoRS;
-import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.MensajeRQ;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.Text;
-import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.TipoDatoMensaje;
 
 /**
  *
  * @author Carlos
  */
-public class LoginRQ extends CuerpoRQ
+public class LogOutRS extends CuerpoRS
 {
 
     @Override
-    public void ejecutar() {
-         agregarAtributo(new Text("carlos", 10) );
-         agregarAtributo(new Text("1234",10));         
+    public void ejecutar() 
+    {
+        agregarAtributo(new Text("EXIT",5));
     }
 
     @Override
-    public String getIdMensaje() 
+    public void definirEstructura() 
     {
-        return "AUTENTIC01";
-    }  
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
+    @Override
+    public String getIdMensaje() {
+        return "LOGOUT0001";
+    }
+    
 }

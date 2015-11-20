@@ -10,6 +10,7 @@ import ec.edu.espe.distribuidas.facturacion.socket.mensajes.ClienteMsjRespuesta;
 import ec.edu.espe.distribuidas.facturacion.socket.mensajes.ListadoClienteRS;
 import ec.edu.espe.distribuidas.facturacion.socket.mensajes.ListadoClienteRespuesta;
 import ec.edu.espe.distribuidas.facturacion.socket.mensajes.LoginRS;
+import ec.edu.espe.distribuidas.facturacion.socket.mensajes.LoginRespuesta;
 import ec.edu.espe.distribuidas.facturacion.socket.mensajes.RetiroRS;
 import ec.edu.espe.distribuidas.facturacion.socket.mensajes.TransaccionRS;
 import org.apache.commons.lang3.StringUtils;
@@ -19,15 +20,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ *Clase que contiene los metodos necesarios para
+ * servir de intermediario entre los Mensajes
+ * 
  * @author Carlos
  */
 public class ControladorMensaje 
 {
     private static final int tamanioCabecera=85;
     
+    
     private List<CuerpoRS> listaRS;
     private List<CuerpoRespuesta> listaRespuestas;
+    
 
     public ControladorMensaje() 
     {
@@ -44,6 +49,7 @@ public class ControladorMensaje
     
     public MensajeRS ejecutarMensaje(String txt)
     {
+        
         String txtCabecera=txt.substring(0,tamanioCabecera);
         String txtCuerpo=txt.substring(tamanioCabecera);
         
@@ -52,11 +58,11 @@ public class ControladorMensaje
         cuerpoRS.definirEstructura();
         cuerpoRS.construirAtributos(txtCuerpo);
         //cuerpoRS.ejecutar();
-        
-                
-        
+           
         return responderMsj(cabecera);
     }
+    
+    
     
     /**
      * Envia un trama respuesta para procesar el mensaje y tener
@@ -96,6 +102,19 @@ public class ControladorMensaje
         return null;
     }
     
+    /**
+     * Obtiene la cabecera de la trama
+     * @param trama
+     * @return 
+     */
+    public Cabecera getCabeceraTrama(String trama)
+    {
+        String txtCabecera=trama.substring(0,tamanioCabecera);               
+        Cabecera cabecera=getCabecera(txtCabecera);   
+        return cabecera;
+    }
+            
+    
     private MensajeRS responderMsj(Cabecera cabeceraRQ)
     {
         MensajeRS mensajeRS=new MensajeRS();
@@ -106,7 +125,7 @@ public class ControladorMensaje
        return mensajeRS;
     }
     
-    private CuerpoRS findCuerpoRs(String idMensaje)
+    public CuerpoRS findCuerpoRs(String idMensaje)
     {
         for (CuerpoRS rs : listaRS) 
         {
@@ -177,8 +196,8 @@ public class ControladorMensaje
     
     private void mensajesDefault()
     {
-        this.agregarCuerpoRS(new ClienteMsjRS());
         this.agregarCuerpoRS(new LoginRS());
+        this.agregarCuerpoRS(new ClienteMsjRS());
         this.agregarCuerpoRS(new ListadoClienteRS());
         this.agregarCuerpoRS(new TransaccionRS());
         this.agregarCuerpoRS(new RetiroRS());
@@ -186,7 +205,14 @@ public class ControladorMensaje
         
         this.listaRespuestas.add(new ClienteMsjRespuesta());
         this.listaRespuestas.add(new ListadoClienteRespuesta());
+        this.listaRespuestas.add(new LoginRespuesta());
     }
     
+    public CuerpoRS getMensajeLogin()
+    {
+        return this.listaRS.get(1);
+    }
+
+
     
 }

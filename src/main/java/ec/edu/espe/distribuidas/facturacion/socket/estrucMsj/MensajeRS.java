@@ -18,6 +18,10 @@ public class MensajeRS extends Mensaje
         super(TIPO_MENSAJE,ORIGINADOR);
     }
 
+    public MensajeRS(Cabecera cabecera, Cuerpo cuerpo) {
+        super(cabecera, cuerpo);
+    }    
+    
     @Override
     public String asTexto() 
     {

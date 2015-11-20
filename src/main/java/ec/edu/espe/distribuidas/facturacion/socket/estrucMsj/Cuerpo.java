@@ -75,6 +75,10 @@ public class Cuerpo
         atributos.clear();        
     }
     
+    public String getAtributo(int indice)
+    {
+        return atributos.get(indice).valor.getDato().toString();
+    }
 
     
 }
