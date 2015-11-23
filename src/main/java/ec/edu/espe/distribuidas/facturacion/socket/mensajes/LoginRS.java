@@ -19,15 +19,19 @@ import ec.edu.espe.distribuidas.facturacion.socket.servidor.SocketComunicacion;
  * @author Carlos
  */
 public class LoginRS extends CuerpoRS
-{
-
+{ 
+    /**
+     * la logica del login
+     */
     public void ejecutar() 
     {
         
         Text usuario=(Text) getParametro("usuario");
         Text clave=(Text) getParametro("clave");              
-        
+
+        ///creado un objeto de los servicios
         UsuarioServicio servicio=new UsuarioServicio();
+        
         if(servicio.login(usuario.getDato(),clave.getDato()))
         {
             agregarAtributo(new Text("OK",2));
@@ -42,12 +46,16 @@ public class LoginRS extends CuerpoRS
     @Override
     public void definirEstructura() 
     {
+        //defines los datos que van a llegar de la peticion para poder usar
+        //en la respuesta
         agregarParametro("usuario",new Text(10));
         agregarParametro("clave",new Text(10));  
+        
     }
 
     @Override
-    public String getIdMensaje() {
+    public String getIdMensaje() 
+    {
         return "AUTENTIC01";
     }
     

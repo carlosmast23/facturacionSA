@@ -5,7 +5,9 @@
  */
 package ec.edu.espe.distribuidas.facturacion.modelo.dao;
 
+
 import ec.edu.espe.distribuidas.facturacion.modelo.conexion.ConexionMysql;
+import ec.edu.espe.distribuidas.facturacion.modelo.conexion.InterfaceConexion;
 import ec.edu.espe.distribuidas.facturacion.modelo.conexion.mapeo.AbstractMapeo;
 import ec.edu.espe.distribuidas.facturacion.modelo.conexion.mapeo.Columna;
 import ec.edu.espe.distribuidas.facturacion.modelo.conexion.mapeo.Lista;
@@ -32,7 +34,7 @@ public abstract class AbstractFacade<T extends AbstractMapeo>
     /**
      * Referencia para obtener una conexion con la base de datos
      */
-    private ConexionMysql conexion;
+    private InterfaceConexion conexion;
     //protected abstract Class getClassEntity();
     private Class<T> entityClass;
     

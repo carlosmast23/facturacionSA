@@ -140,4 +140,9 @@ public class TextV extends TipoDatoMensaje<String[]>
         return resultado;
     }
     
+    public int sizeGrupos()
+    {
+        return numeroGrupos.getDato();
+    }
+    
 }

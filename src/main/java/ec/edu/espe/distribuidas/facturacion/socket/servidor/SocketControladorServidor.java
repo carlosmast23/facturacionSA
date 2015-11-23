@@ -31,14 +31,14 @@ public class SocketControladorServidor implements Runnable
     
     private InterfaceVistaComunicacion interfaceComunicacion;
 
-    public SocketControladorServidor() 
+    public SocketControladorServidor(int puerto) 
     {
         //this.listaClientes=listaClientes;
         estadoHilo=true;
         this.mensajeConsola="";
         this.listaConexiones=new ArrayList<SocketComunicacion>();
         hiloConexiones=new Thread(this);
-        socketServidor=new SocketServidor();
+        socketServidor=new SocketServidor(puerto);
         this.controladorMensaje=new ControladorMensaje();
     }
     
@@ -58,6 +58,7 @@ public class SocketControladorServidor implements Runnable
             //obtener una conexion de tipo socket con el cliente
             addMensajeConsola("Esperando una nueva conexion ...");
             Socket socket=socketServidor.conectar();
+            System.out.println("Puerto: "+socket.getPort());
             addMensajeConsola("!Nueva conexion establecida con el cliente!");
             SocketComunicacion sc=new SocketComunicacion(socket,listaConexiones);
             sc.setInterfaceComunicacion(interfaceComunicacion);

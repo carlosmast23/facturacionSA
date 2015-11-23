@@ -22,9 +22,9 @@ public class SocketControladorCliente
     private SocketCliente socketCliente;
     private ControladorMensaje controladorMsj;
     
-    public SocketControladorCliente()
+    public SocketControladorCliente(String host,int puerto)
     {
-        this.socketCliente=new SocketCliente();
+        this.socketCliente=new SocketCliente(host,puerto);
         this.controladorMsj=new ControladorMensaje();
     }
     
@@ -44,6 +44,7 @@ public class SocketControladorCliente
     public Mensaje enviarMensaje(MensajeRQ mensajeRQ) throws ExcepcionSocketDesconectado
     {
         boolean resultado=this.socketCliente.salida(mensajeRQ.asTexto());
+        //verifica que el mensaje se pudo enviar
         if(resultado)
         {
             String tramaRespuesta=this.socketCliente.leer();
@@ -52,6 +53,7 @@ public class SocketControladorCliente
                 return null;
             }
             Mensaje mensajeRespuesta=controladorMsj.construirMensaje(tramaRespuesta);
+            
             return mensajeRespuesta;
         }
         else

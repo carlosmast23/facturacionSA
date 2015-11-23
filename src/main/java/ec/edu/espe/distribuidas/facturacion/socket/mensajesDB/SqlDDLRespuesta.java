@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.edu.espe.distribuidas.facturacion.socket.mensajes;
+package ec.edu.espe.distribuidas.facturacion.socket.mensajesDB;
 
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.CuerpoRespuesta;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.Text;
@@ -12,19 +12,17 @@ import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.Text;
  *
  * @author Carlos
  */
-public class LoginRespuesta extends CuerpoRespuesta
+public class SqlDDLRespuesta extends CuerpoRespuesta
 {
-    
-
     @Override
     public void definirEstructura() 
     {
-        agregarAtributo("respuesta",new Text(2)); 
+        agregarAtributo("respuesta",new Text(10));        
     }
 
     @Override
     public String getIdMensaje() {
-        return "AUTENTIC01";
+        return "SQLDDL001";
     }
     
 }

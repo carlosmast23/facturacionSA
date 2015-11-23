@@ -6,8 +6,11 @@
 package ec.edu.espe.distribuidas.facturacion.modelo.test;
 
 import ec.edu.espe.distribuidas.facturacion.modelo.dao.ClienteFacade;
+import ec.edu.espe.distribuidas.facturacion.modelo.dao.UsuarioFacade;
 import ec.edu.espe.distribuidas.facturacion.modelo.entity.Cliente;
+import ec.edu.espe.distribuidas.facturacion.modelo.entity.Usuario;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.ValidadorFormato;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -17,9 +20,23 @@ import org.apache.commons.lang3.StringUtils;
 public class Menu {
     public static void main(String[] args)
     {
-        //ClienteFacade facade=new ClienteFacade();
-        //Cliente cliente=facade.findByPrimaryKey("1724218951");
-        //System.out.println(cliente);
-        System.out.println(StringUtils.splitByWholeSeparator("|2|3","|")[0]);
+        UsuarioFacade facade=new UsuarioFacade();
+       // Usuario usuario=facade.findByPrimaryKey("juan");
+        
+        //ClienteFacade facade2=new ClienteFacade();
+       
+        //Usuario usuario2=new Usuario("pepe","1234");
+        //facade.insert(usuario2);
+                
+        List<Usuario> lista=facade.findAll();
+        
+        for (Usuario lista1 : lista) {
+            System.out.println(lista1);
+        }
+        //System.err.println(usuario.getClave());
+       // Usuario usuario=new Usuario("henry","distri");
+        
+       // facade.insert(usuario);        
+        
     }
 }

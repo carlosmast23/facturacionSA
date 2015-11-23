@@ -5,9 +5,11 @@
  */
 package ec.edu.espe.distribuidas.facturacion.socket.mensajes;
 
+import ec.edu.espe.distribuidas.facturacion.modelo.dao.UsuarioFacade;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.CuerpoRQ;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.CuerpoRS;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.MensajeRQ;
+import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.Ent;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.Text;
 import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.TipoDatoMensaje;
 
@@ -16,12 +18,17 @@ import ec.edu.espe.distribuidas.facturacion.socket.estrucMsj.tipoDato.TipoDatoMe
  * @author Carlos
  */
 public class LoginRQ extends CuerpoRQ
-{
-
+{    
     @Override
-    public void ejecutar() {
-         agregarAtributo(new Text("carlos", 10) );
-         agregarAtributo(new Text("1234",10));         
+    public void ejecutar() 
+    {        
+         //manda el usuario
+         agregarAtributo(new Text("carlos",10));
+         //manda la clave
+         agregarAtributo(new Text("1234",10));
+         
+         //agregarAtributo(null);
+        // agregarAtributo(new Ent(1234,5));
     }
 
     @Override

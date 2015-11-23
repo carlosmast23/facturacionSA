@@ -13,9 +13,9 @@ import ec.edu.espe.distribuidas.facturacion.modelo.entity.Usuario;
  */
 public class UsuarioFacade extends AbstractFacade<Usuario>
 {
-
-    public UsuarioFacade() {
+    public UsuarioFacade() 
+    {
         super(Usuario.class);
-    }
+    }   
     
 }

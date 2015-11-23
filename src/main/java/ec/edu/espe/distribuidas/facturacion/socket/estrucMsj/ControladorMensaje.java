@@ -13,6 +13,8 @@ import ec.edu.espe.distribuidas.facturacion.socket.mensajes.LoginRS;
 import ec.edu.espe.distribuidas.facturacion.socket.mensajes.LoginRespuesta;
 import ec.edu.espe.distribuidas.facturacion.socket.mensajes.RetiroRS;
 import ec.edu.espe.distribuidas.facturacion.socket.mensajes.TransaccionRS;
+import ec.edu.espe.distribuidas.facturacion.socket.mensajesDB.SqlDDLRespuesta;
+import ec.edu.espe.distribuidas.facturacion.socket.mensajesDB.SqlDMLRespuesta;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.LinkedList;
@@ -206,6 +208,8 @@ public class ControladorMensaje
         this.listaRespuestas.add(new ClienteMsjRespuesta());
         this.listaRespuestas.add(new ListadoClienteRespuesta());
         this.listaRespuestas.add(new LoginRespuesta());
+        this.listaRespuestas.add(new SqlDDLRespuesta());
+        this.listaRespuestas.add(new SqlDMLRespuesta());
     }
     
     public CuerpoRS getMensajeLogin()

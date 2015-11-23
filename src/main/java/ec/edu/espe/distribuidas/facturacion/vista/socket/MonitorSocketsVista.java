@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,13 +32,14 @@ public class MonitorSocketsVista extends javax.swing.JFrame implements Interface
     public MonitorSocketsVista() {
         initComponents();
         this.listaComuniaciones=new LinkedList<>();
-        this.controladorSocket=new SocketControladorServidor();
+        this.controladorSocket=new SocketControladorServidor(6666);
         //this.listaClientes=new DefaultListModel<>();
         //this.ListClientes.setModel(listaClientes);
         this.controladorSocket.setInterfaceComunicacion(this);
         
         this.mensajeConsola=new StringBuilder();
         agregarMsjConsola("Bienvenido al Sistema");
+        jLabel1.setText("MONITOR SERVIDOR DE APLICACIONES");
     }
 
     /**
@@ -73,18 +75,18 @@ public class MonitorSocketsVista extends javax.swing.JFrame implements Interface
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setForeground(new java.awt.Color(0, 102, 102));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Servidor");
+        jLabel1.setText("Monitor Servidor");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(171, 171, 171)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

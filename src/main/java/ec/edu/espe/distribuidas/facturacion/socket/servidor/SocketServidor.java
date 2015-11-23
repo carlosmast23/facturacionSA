@@ -16,15 +16,26 @@ import java.util.logging.Logger;
  *
  * @author Home
  */
-public class SocketServidor {
+public class SocketServidor 
+{
     
     private int puerto;
     ServerSocket sc;
     
-    public SocketServidor() 
+//    public SocketServidor() 
+//    {
+//        try {
+//            this.puerto=9999;
+//            sc=new ServerSocket(puerto);
+//        } catch (IOException ex) {
+//            Logger.getLogger(SocketServidor.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+    
+    public SocketServidor(int puerto) 
     {
         try {
-            this.puerto=9999;
+            this.puerto=puerto;
             sc=new ServerSocket(puerto);
         } catch (IOException ex) {
             Logger.getLogger(SocketServidor.class.getName()).log(Level.SEVERE, null, ex);

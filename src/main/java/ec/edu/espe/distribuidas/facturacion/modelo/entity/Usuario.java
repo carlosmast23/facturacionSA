@@ -19,12 +19,13 @@ public class Usuario extends AbstractMapeo
     private String nick;
     private String clave;
 
-    public Usuario() {
+    public Usuario() 
+    {        
     }
-
     
     
-    public Usuario(String nick, String clave) {
+    public Usuario(String nick, String clave) 
+    {
         this.nick = nick;
         this.clave = clave;
     }
@@ -68,18 +69,18 @@ public class Usuario extends AbstractMapeo
     }
 
     @Override
-    public void setMapeo() {
+    public void setMapeo() 
+    {
         mapeo.setNombreTabla("usuario");
         mapeo.addColumna(new Columna("nick",getField("nick"),"pk"));
         mapeo.addColumna(new Columna("clave",getField("clave"),""));
     }
 
+    
     @Override
     public Class getDao() 
     {
         return UsuarioFacade.class;
-    }
-    
-    
+    }    
     
 }

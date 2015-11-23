@@ -9,12 +9,14 @@ import ec.edu.espe.distribuidas.facturacion.modelo.dao.ClienteFacade;
 import ec.edu.espe.distribuidas.facturacion.modelo.dao.UsuarioFacade;
 import ec.edu.espe.distribuidas.facturacion.modelo.entity.Cliente;
 import ec.edu.espe.distribuidas.facturacion.modelo.entity.Usuario;
+import java.util.List;
 
 /**
  *
  * @author Carlos
  */
-public class UsuarioServicio {
+public class UsuarioServicio 
+{
     private UsuarioFacade facade;
 
     public UsuarioServicio() 
@@ -24,7 +26,8 @@ public class UsuarioServicio {
        
     
     public boolean login(String nick,String clave)
-    {
+    {        
+        
         Usuario usuario=facade.findByPrimaryKey(nick);
         if(usuario.getClave().equals(clave))
         {
@@ -33,4 +36,16 @@ public class UsuarioServicio {
         return false;
        
     }
-}
+    
+    public List<Usuario> obtenerTodos()
+    {
+        List<Usuario> todos=facade.findAll();
+        return todos;
+    }
+    
+    public void insertar(Usuario usuario)
+    {
+        facade.insert(usuario);
+    }
+        
+}   

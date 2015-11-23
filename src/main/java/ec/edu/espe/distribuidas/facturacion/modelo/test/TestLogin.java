@@ -27,9 +27,9 @@ public class TestLogin {
           System.out.println(mq.asTexto());
           
           ControladorMensaje controlador=new ControladorMensaje();
+          
           MensajeRS rs=controlador.ejecutarMensaje(mq.asTexto());
-          System.out.println(rs.asTexto());
-        
+          System.out.println(rs.asTexto());        
           
     }
 }

@@ -33,7 +33,7 @@ public class LoginVista extends javax.swing.JFrame {
      */
     public LoginVista() {
         initComponents();
-        this.controladorCliente=new SocketControladorCliente();
+        this.controladorCliente=new SocketControladorCliente("localhost",6666);
     }
 
     /**
@@ -130,10 +130,12 @@ public class LoginVista extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         MensajeRQ mensaje=new MensajeRQ();
-        CuerpoRQ cuerpo=new CuerpoRQ() {
-
+        
+        CuerpoRQ cuerpo=new CuerpoRQ() 
+        {
             @Override
-            public void ejecutar() {
+            public void ejecutar() 
+            {
                 agregarAtributo(new Text(txtNick.getText(),10));
                 agregarAtributo(new Text(txtClave.getText(),10));
             }
@@ -143,14 +145,18 @@ public class LoginVista extends javax.swing.JFrame {
                 return "AUTENTIC01";
             }
         };
+        
+        
         mensaje.setCuerpo(cuerpo);
         Mensaje respuesta;
         
-        try {
-            respuesta = controladorCliente.enviarMensaje(mensaje);
+        try 
+        {
+            respuesta = controladorCliente.enviarMensaje(mensaje);            
             JOptionPane.showMessageDialog(rootPane,respuesta.getCuerpo().getAtributos("respuesta").getDato());
-        } catch (ExcepcionSocketDesconectado ex) {
-            JOptionPane.showMessageDialog(rootPane,"El socket fue desconetado");
+        } catch (ExcepcionSocketDesconectado ex) 
+        {
+            JOptionPane.showMessageDialog(rootPane,"El socket fue desconetado");            
         }
         
         
